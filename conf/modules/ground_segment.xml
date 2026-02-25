@@ -1,0 +1,51 @@
+<!DOCTYPE module SYSTEM "module.dtd">
+
+<!--
+  ============================================================
+  CUSTOM MODULE - TU Delft MAV Course Group Addition
+  This is NOT a standard Paparazzi module.
+  Added by the team for ground segmentation functionality.
+  ============================================================
+-->
+
+<module name="ground_segment" dir="computer_vision">
+  <doc>
+    <description>
+      Ground segmentation module for onboard camera processing.
+      Segments ground pixels from non-ground pixels using YUV color
+      thresholds and visualizes the result in the RTP video stream.
+
+      Custom group module - not part of standard Paparazzi.
+    </description>
+    <define name="GROUND_SEGMENT_CAMERA" value="front_camera|bottom_camera" description="Camera device to use (default: front_camera)"/>
+    <define name="GROUND_SEGMENT_FPS" value="0" description="Frames per second to process (0 = camera rate)"/>
+    <define name="GROUND_SEGMENT_Y_MIN" value="50" description="Min luminance for ground detection"/>
+    <define name="GROUND_SEGMENT_U_MAX" value="130" description="Max blue chrominance for ground detection"/>
+    <define name="GROUND_SEGMENT_V_MAX" value="130" description="Max red chrominance for ground detection"/>
+  </doc>
+
+  <settings>
+    <dl_settings>
+      <dl_settings name="GroundSegment">
+        <dl_setting var="gs_y_min" min="0" step="1" max="255" shortname="y_min"/>
+        <dl_setting var="gs_u_max" min="0" step="1" max="255" shortname="u_max"/>
+        <dl_setting var="gs_v_max" min="0" step="1" max="255" shortname="v_max"/>
+        <dl_setting var="gs_draw"  min="0" step="1" max="1" values="False|True" shortname="draw"/>
+      </dl_settings>
+    </dl_settings>
+  </settings>
+
+  <dep>
+    <depends>video_thread</depends>
+  </dep>
+
+  <header>
+    <file name="ground_segment.h"/>
+  </header>
+
+  <init fun="ground_segment_init()"/>
+
+  <makefile target="ap|nps">
+    <file name="ground_segment.c"/>
+  </makefile>
+</module>

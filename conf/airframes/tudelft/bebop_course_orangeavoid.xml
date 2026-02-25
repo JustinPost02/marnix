@@ -84,6 +84,12 @@
       <define name="VIEWVIDEO_DOWNSIZE_FACTOR" value="1"/>
       <define name="VIEWVIDEO_QUALITY_FACTOR" value="40"/>
     </module>
+
+    <!-- CUSTOM GROUP MODULE: Ground segmentation (not standard Paparazzi) -->
+    <module name="ground_segment">
+      <define name="GROUND_SEGMENT_CAMERA" value="front_camera"/>
+      <define name="GROUND_SEGMENT_FPS" value="0"/>
+    </module>
   </firmware>
 
   <commands>
