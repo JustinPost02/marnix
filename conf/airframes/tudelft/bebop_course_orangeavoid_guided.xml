@@ -9,6 +9,7 @@
       <define name="VIDEO_CAPTURE_PATH" value="/data/ftp/internal_000/images"/>
       <define name="LOGGER_FILE_PATH" value="/data/ftp/internal_000/log"/>
       <define name="MT9V117_TARGET_FPS" value="20"/>
+      <define name="CAMERA_ROTATED_90DEG_RIGHT" value="TRUE"/>
       
       <!-- Detect orange -->
       <define name="COLOR_OBJECT_DETECTOR_LUM_MIN1" value="30"/>
@@ -30,6 +31,7 @@
       <module name="fdm" type="gazebo"/>
       <define name="VIDEO_CAPTURE_PATH" value="/tmp/paparazzi/images"/>
       <define name="LOGGER_FILE_PATH" value="/tmp/paparazzi/log"/>
+      <define name="CAMERA_ROTATED_90DEG_RIGHT" value="TRUE"/>
       
       <!-- Detect orange -->
       <define name="COLOR_OBJECT_DETECTOR_LUM_MIN1" value="41"/>
@@ -86,6 +88,18 @@
     <module name="orange_avoider_guided">
       <define name="ORANGE_AVOIDER_VISUAL_DETECTION_ID" value="COLOR_OBJECT_DETECTION1_ID"/>
       <define name="FLOOR_VISUAL_DETECTION_ID" value="COLOR_OBJECT_DETECTION2_ID"/>
+    </module>
+    <module name="cv_detect_gate">
+      <define name="DETECT_GATE_CAMERA" value="front_camera"/>
+      <define name="DETECT_GATE_FPS" value="0"/>
+      <define name="DETECT_GATE_MIN_N_SIDES" value="2"/>
+      <define name="DETECT_GATE_MIN_GATE_QUALITY" value="0.08"/>
+      <define name="DETECT_GATE_Y_MIN" value="20"/>
+      <define name="DETECT_GATE_Y_MAX" value="220"/>
+      <define name="DETECT_GATE_U_MIN" value="130"/>
+      <define name="DETECT_GATE_U_MAX" value="255"/>
+      <define name="DETECT_GATE_V_MIN" value="0"/>
+      <define name="DETECT_GATE_V_MAX" value="130"/>
     </module>
     <module name="video_rtp_stream">
       <define name="VIEWVIDEO_CAMERA" value="front_camera"/>

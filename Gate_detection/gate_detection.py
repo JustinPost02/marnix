@@ -42,6 +42,7 @@ def draw_blue_regions(image: np.ndarray, mask: np.ndarray) -> np.ndarray:
 	"""Draw contours and bounding boxes around detected blue regions."""
 	output = image.copy()
 	contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+	valid_boxes: list[tuple[int, int, int, int]] = []
 
 	for contour in contours:
 		area = cv2.contourArea(contour)
@@ -49,8 +50,30 @@ def draw_blue_regions(image: np.ndarray, mask: np.ndarray) -> np.ndarray:
 			continue
 
 		x, y, w, h = cv2.boundingRect(contour)
+		if w >= h:
+			continue
+		valid_boxes.append((x, y, w, h))
+
+	if len(valid_boxes) == 2:
+		left_box, right_box = sorted(valid_boxes, key=lambda box: box[0])
+		left_inner_edge = left_box[0] + left_box[2]
+		right_inner_edge = right_box[0]
+
+		if right_inner_edge > left_inner_edge:
+			left_top = (left_inner_edge, left_box[1])
+			left_bottom = (left_inner_edge, left_box[1] + left_box[3])
+			right_top = (right_inner_edge, right_box[1])
+			right_bottom = (right_inner_edge, right_box[1] + right_box[3])
+
+			trapezoid = np.array(
+				[left_top, right_top, right_bottom, left_bottom],
+				dtype=np.int32,
+			)
+			cv2.polylines(output, [trapezoid], isClosed=True, color=(0, 255, 0), thickness=2)
+			return output
+
+	for x, y, w, h in valid_boxes:
 		cv2.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 2)
-		cv2.drawContours(output, [contour], -1, (0, 0, 255), 2)
 
 	return output
 
