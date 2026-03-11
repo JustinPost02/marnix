@@ -78,6 +78,12 @@
     <module name="orange_avoider">
       <define name="ORANGE_AVOIDER_VISUAL_DETECTION_ID" value="COLOR_OBJECT_DETECTION1_ID"/>
     </module>
+    <module name="danger_detector">
+      <define name="DANGER_DETECTOR_CAMERA" value="front_camera"/>
+      <define name="DANGER_DETECTOR_FPS" value="0"/>
+      <define name="DANGER_DETECTOR_NUM_COLUMNS" value="12"/>
+      <define name="DANGER_DETECTOR_VERBOSE"/>
+    </module>
     <module name="video_rtp_stream">
       <define name="VIEWVIDEO_CAMERA" value="front_camera"/>
       <define name="VIEWVIDEO_CAMERA2" value="bottom_camera"/>
