@@ -1,7 +1,7 @@
 <!DOCTYPE airframe SYSTEM "../airframe.dtd">
 
-<airframe name="bebop_avoider">
-  <description>MAVLAB Course TUDelft 2023
+<airframe name="groep_11_main_config">
+  <description>MAVLAB Course TUDelft 2026
   </description>
 
 
@@ -70,16 +70,14 @@
       <define name="OPENCVDEMO_CAMERA" value="front_camera"/>
       <define name="OPENCVDEMO_FPS" value="10"/>
     </module -->
-    <module name="orange_avoider">
-      <!-- Set to match the sender ID used by the vision team's slice detection module -->
-      <define name="OBSTACLE_DETECTION_ID" value="1"/>
+    <module name="cv_detect_color_object">
+      <define name="COLOR_OBJECT_DETECTOR_CAMERA1" value="front_camera"/>
+      <define name="COLOR_OBJECT_DETECTOR_FPS1" value="0"/>
+      <define name="COLOR_OBJECT_DETECTOR_DRAW1" value="1"/>
     </module>
-    <module name="danger_detector">
-      <define name="DANGER_DETECTOR_CAMERA" value="front_camera"/>
-      <define name="DANGER_DETECTOR_FPS" value="0"/>
-      <define name="DANGER_DETECTOR_NUM_ZONES" value="12"/>
-      <define name="DANGER_DETECTOR_VERBOSE"/>
-    </module>
+    <!-- <module name="orange_avoider">
+      <define name="ORANGE_AVOIDER_VISUAL_DETECTION_ID" value="COLOR_OBJECT_DETECTION1_ID"/>
+    </module> -->
     <module name="video_rtp_stream">
       <define name="VIEWVIDEO_CAMERA" value="front_camera"/>
       <define name="VIEWVIDEO_CAMERA2" value="bottom_camera"/>
